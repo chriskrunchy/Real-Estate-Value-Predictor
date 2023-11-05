@@ -8,7 +8,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import LabelEncoder
 
 
-df = pd.read_csv('data/houses_edited')
+df = pd.read_csv('data/houses_edited', index_col=None)
 
 
 # Remove rows with null values from the original DataFrame
