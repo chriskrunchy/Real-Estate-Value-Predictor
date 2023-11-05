@@ -47,7 +47,7 @@ rf_regressor.fit(X_train, y_train)
 result = permutation_importance(
     rf_regressor, X, y, n_repeats=30, random_state=42)
 selected_features = result.importances_mean > 0
-X_selected = X.loc[:, selected_features]
+X_selected = X.iloc[:, selected_features]
 
 # Retrain the model with the selected features
 new_rf_regressor = RandomForestRegressor(n_estimators=100, random_state=42)
