@@ -8,13 +8,16 @@ df = pd.read_csv('file_name.csv')
 # Remove rows with null values from the original DataFrame
 df.dropna(inplace=True)
 
+#finding min and max values 
+for i in df.columns:  
+    print(i,'Min value :', df[i].min(),'Max value :', df[i].max())
 
 # Example data preparation code
-X = your_features  # Feature matrix
-y = your_target    # Target variable
+X = df.drop('price', axis = 1)  # Feature matrix
+y = df['price']    # Target variable
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42)
 
 # Create a Random Forest Regressor model
 rf_regressor = RandomForestRegressor(n_estimators=100, random_state=42)
