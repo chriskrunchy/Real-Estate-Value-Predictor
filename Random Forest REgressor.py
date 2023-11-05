@@ -14,12 +14,11 @@ df = pd.read_csv('data/houses_edited', index_col=None)
 # Remove rows with null values from the original DataFrame
 df.dropna(inplace=True)
 
+# Converting data to ints that can be analyzed
+df = pd.get_dummies(df, columns=['city_district'])
+
 
 # Loop to remove outliers in all columns
-for column in df.columns:
-    # coding categorical data into quantative data that can analyzed.
-    df[column] = le().fit_transform(df[column])
-
 for column in df.columns:
     Q1 = df[column].quantile(0.25)
     Q3 = df[column].quantile(0.75)
@@ -30,7 +29,7 @@ for column in df.columns:
 
 # Prepare your data for modeling
 columns_to_drop = ['final_price', 'final_price_transformed',
-                   'final_price_log', 'full_link', 'full_address', 'title', 'mls']
+                   'final_price_log', 'full_link', 'full_address', 'title', 'mls', 'district_code']
 X = df.drop(columns_to_drop, axis=1)
 y = df['final_price']  # Target variable
 
