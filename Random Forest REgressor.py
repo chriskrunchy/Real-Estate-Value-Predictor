@@ -25,7 +25,7 @@ for column in df.columns:
 
 # Prepare your data for modeling
 X = df.drop('final_price', 'final_price_transformed',
-            'final_price_log', axis=1)  # Feature matrix
+            'final_price_log', 'full_link', 'full_address' axis=1)  # Feature matrix
 y = df['final_price']  # Target variable
 
 # Split your data into training and testing sets
