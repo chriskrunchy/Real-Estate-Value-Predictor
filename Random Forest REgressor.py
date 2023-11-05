@@ -15,6 +15,9 @@ neighbourhood_to_code = dict(zip(df['KeyColumn'], df['ValueColumn']))
 df.dropna(inplace=True)
 
 # Converting data to ints that can be analyzed
+columns_to_drop = ['final_price_transformed',
+                   'final_price_log', 'full_link', 'full_address', 'title', 'mls', 'district_code', 'bedrooms']
+df = df.drop(columns_to_drop, axis=1)
 df = pd.get_dummies(df, columns=['city_district'])
 
 
@@ -28,9 +31,8 @@ for column in df.columns:
     df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
 
 # Prepare your data for modeling
-columns_to_drop = ['final_price', 'final_price_transformed',
-                   'final_price_log', 'full_link', 'full_address', 'title', 'mls', 'district_code', 'bedrooms']
-X = df.drop(columns_to_drop, axis=1)
+
+X = df.drop('final_price', axis=1)
 y = df['final_price']  # Target variable
 
 # Split your data into training and testing sets
