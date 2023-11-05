@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.inspection import permutation_importance
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
+from sklearn.preprocessing import LabelEncoder
 
 
 df = pd.read_csv('data/houses_edited')
@@ -16,17 +17,21 @@ df.dropna(inplace=True)
 
 # Loop to remove outliers in all columns
 for column in df.columns:
+    # coding categorical data into quantative data that can analyzed.
+    df[column] = le.fit_transform(df[column])
+
+for column in df.columns:
     Q1 = df[column].quantile(0.25)
     Q3 = df[column].quantile(0.75)
     IQR = Q3 - Q1
     lower_bound = Q1 - 1.5 * IQR
     upper_bound = Q3 + 1.5 * IQR
     df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
-    df[column] = le.fit_transform(df[column])
 
 # Prepare your data for modeling
-X = df.drop('final_price', 'final_price_transformed',
-            'final_price_log', 'full_link', 'full_address', 'title', 'mls',  axis=1)  # Feature matrix
+columns_to_drop = ['final_price', 'final_price_transformed',
+                   'final_price_log', 'full_link', 'full_address', 'title', 'mls']
+X = df.drop(columns_to_drop, axis=1)
 y = df['final_price']  # Target variable
 
 # Split your data into training and testing sets
