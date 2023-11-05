@@ -18,7 +18,7 @@ df.dropna(inplace=True)
 # Loop to remove outliers in all columns
 for column in df.columns:
     # coding categorical data into quantative data that can analyzed.
-    df[column] = le.fit_transform(df[column])
+    df[column] = le().fit_transform(df[column])
 
 for column in df.columns:
     Q1 = df[column].quantile(0.25)
