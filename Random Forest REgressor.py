@@ -24,8 +24,9 @@ for column in df.columns:
     df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
 
 # Prepare your data for modeling
-X = df.drop('price', axis=1)  # Feature matrix
-y = df['price']  # Target variable
+X = df.drop('final_price', 'final_price_transformed',
+            'final_price_log', axis=1)  # Feature matrix
+y = df['final_price']  # Target variable
 
 # Split your data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
