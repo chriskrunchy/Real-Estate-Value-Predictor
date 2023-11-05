@@ -22,10 +22,11 @@ for column in df.columns:
     lower_bound = Q1 - 1.5 * IQR
     upper_bound = Q3 + 1.5 * IQR
     df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+    df[column] = le.fit_transform(df[column])
 
 # Prepare your data for modeling
 X = df.drop('final_price', 'final_price_transformed',
-            'final_price_log', 'full_link', 'full_address' axis=1)  # Feature matrix
+            'final_price_log', 'full_link', 'full_address', 'title', 'mls',  axis=1)  # Feature matrix
 y = df['final_price']  # Target variable
 
 # Split your data into training and testing sets
