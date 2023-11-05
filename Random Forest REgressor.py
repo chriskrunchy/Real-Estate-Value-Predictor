@@ -9,7 +9,10 @@ from sklearn.preprocessing import LabelEncoder
 
 
 df = pd.read_csv('data/houses_edited', index_col=None)
-neighbourhood_to_code = dict(zip(df['KeyColumn'], df['ValueColumn']))
+neighbourhood_to_code = dict(zip(df['city_district'], df['district_code']))
+
+
+
 
 # Remove rows with null values from the original DataFrame
 df.dropna(inplace=True)
@@ -63,3 +66,4 @@ r2 = r2_score(y_test, y_pred)
 
 print(f"Mean Squared Error: {mse}")
 print(f"R-squared: {r2}")
+d istrict_to_income = dict(zip(df['city_district'], df['mean_district_income']))
