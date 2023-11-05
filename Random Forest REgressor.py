@@ -9,7 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 
 
 df = pd.read_csv('data/houses_edited', index_col=None)
-
+neighbourhood_to_code = dict(zip(df['KeyColumn'], df['ValueColumn']))
 
 # Remove rows with null values from the original DataFrame
 df.dropna(inplace=True)
@@ -29,7 +29,7 @@ for column in df.columns:
 
 # Prepare your data for modeling
 columns_to_drop = ['final_price', 'final_price_transformed',
-                   'final_price_log', 'full_link', 'full_address', 'title', 'mls', 'district_code']
+                   'final_price_log', 'full_link', 'full_address', 'title', 'mls', 'district_code', 'bedrooms']
 X = df.drop(columns_to_drop, axis=1)
 y = df['final_price']  # Target variable
 
