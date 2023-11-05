@@ -16,11 +16,13 @@ for i in df.columns:
 X = df.drop('price', axis = 1)  # Feature matrix
 y = df['price']    # Target variable
 
+#spliiting your data into your test and training sets. Reserving 80% for training and 20% for testing 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42)
 
+
 # Create a Random Forest Regressor model
-rf_regressor = RandomForestRegressor(n_estimators=100, random_state=42)
+rf_regressor = RandomForestRegressor(n_estimators=200, random_state=42)
 
 # Train the model on the training data
 rf_regressor.fit(X_train, y_train)
